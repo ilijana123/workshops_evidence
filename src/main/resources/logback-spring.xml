@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />  </root>
+
+    <logger name="com.example.workshops_evidence" level="INFO" additivity="false">  <appender-ref ref="CONSOLE" />
+    </logger>
+
+    <logger name="com.example.workshops_evidence.Service.JwtService" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+</configuration>

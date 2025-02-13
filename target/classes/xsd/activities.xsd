@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://example.com/activities"
+           targetNamespace="http://example.com/activities"
+           elementFormDefault="qualified">
+
+    <xs:element name="addActivityRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="workshopId" type="xs:int" />
+                <xs:element name="title" type="xs:string" />
+                <xs:element name="description" type="xs:string" />
+                <xs:element name="status" type="tns:activityStatus" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="addActivityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="success" type="xs:boolean" />
+                <xs:element name="message" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="activityStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="TODO" />
+            <xs:enumeration value="IN_PROGRESS" />
+            <xs:enumeration value="DONE" />
+            <xs:enumeration value="PENDING" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="deleteActivityRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="workshopId" type="xs:int" />
+                <xs:element name="activityId" type="xs:int" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteActivityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="success" type="xs:boolean" />
+                <xs:element name="message" type="xs:string" />
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteWorkshopRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="workshopId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="deleteWorkshopResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="success" type="xs:boolean"/>
+                <xs:element name="message" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getUsersForActivityRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="activityId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getUsersForActivityResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="users" type="tns:userResponse" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="userResponse">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="email" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="getAllWorkshopsRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ownerId" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllWorkshopsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="workshops" type="tns:workshopResponse" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="workshopResponse">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="status" type="tns:Status"/>
+            <xs:element name="date" type="xs:string"/>
+            <xs:element name="ownerId" type="xs:int"/>
+            <xs:element name="type" type="xs:string"/>
+            <xs:element name="priority" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="Status">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACTIVE" />
+            <xs:enumeration value="COMPLETED" />
+            <xs:enumeration value="CANCELLED" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
